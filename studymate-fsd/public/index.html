@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StudyMate - your friendly study planning companion">
+  <title>StudyMate | Smart Student Study Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="StudyMate home"><span class="brand-icon">✿</span><span>Study<span class="brand-accent">Mate</span><small>your happy study place</small></span></a>
+      <p class="nav-label">YOUR WORKSPACE</p>
+      <nav class="nav-menu">
+        <button class="nav-link active" data-page="dashboard"><span>⌂</span> Dashboard</button>
+        <button class="nav-link" data-page="timetable"><span>▦</span> Study timetable</button>
+        <button class="nav-link" data-page="tasks"><span>☑</span> My tasks</button>
+        <button class="nav-link" data-page="progress"><span>◔</span> Progress</button>
+        <button class="nav-link" data-page="timer"><span>◷</span> Focus timer</button>
+        <button class="nav-link" data-page="notes"><span>▤</span> My notes</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="mini-note"><span class="sparkle">✦</span><strong>Little steps add up!</strong><p>Every study session brings you closer to your goals.</p></div>
+        <button id="themeToggle" class="theme-toggle"><span id="themeIcon">☾</span><span id="themeText">Switch to dark mode</span></button>
+        <div class="profile"><div class="avatar">📚</div><div><strong>Study Buddy</strong><small>Keep growing ✨</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button id="menuToggle" class="menu-toggle" aria-label="Open navigation">☰</button>
+        <div><p class="eyebrow" id="todayLabel">YOUR DAILY SPACE</p><h1 id="pageTitle">Good day, learner! <span>🌷</span></h1></div>
+        <div class="topbar-right"><span class="date-pill" id="todayDate"></span><div class="top-avatar">🌼</div></div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <div class="welcome-banner">
+          <div><span class="banner-tag">A LITTLE PROGRESS EVERY DAY</span><h2>Make today count! <span>✨</span></h2><p>Plan your time, find your focus, and celebrate every win.</p><button class="primary-btn" data-go="timetable">＋ Plan a study session</button></div>
+          <div class="banner-art" aria-hidden="true"><span class="art-sun">☀</span><span class="art-book">📚</span><span class="art-flower">🌸</span><span class="art-star">✦</span></div>
+        </div>
+        <div class="section-heading"><div><h2>Your overview</h2><p>A little snapshot of your study journey.</p></div><span class="soft-chip">YOU'VE GOT THIS 💗</span></div>
+        <div class="stats-grid">
+          <article class="stat-card lilac"><div class="stat-top"><span>Tasks completed</span><span class="stat-icon">☑</span></div><strong id="statCompleted">0</strong><p><span id="statTotal">0</span> tasks in total</p><div class="mini-progress"><span id="taskProgressBar"></span></div></article>
+          <article class="stat-card peach"><div class="stat-top"><span>To-do list</span><span class="stat-icon">✎</span></div><strong id="statPending">0</strong><p>Things left to do</p><span class="stat-decoration">♡</span></article>
+          <article class="stat-card mint"><div class="stat-top"><span>Study sessions</span><span class="stat-icon">▦</span></div><strong id="statSessions">0</strong><p>Sessions planned</p><span class="stat-decoration">✿</span></article>
+          <article class="stat-card blue"><div class="stat-top"><span>Study minutes</span><span class="stat-icon">◷</span></div><strong id="statMinutes">0</strong><p>Total planned minutes</p><span class="stat-decoration">✦</span></article>
+        </div>
+        <div class="dashboard-columns">
+          <article class="panel"><div class="panel-heading"><div><h3>Today's study plan</h3><p>Keep your day balanced 🌱</p></div><button class="text-btn" data-go="timetable">View all →</button></div><div id="dashboardSessions" class="session-list"></div></article>
+          <article class="panel"><div class="panel-heading"><div><h3>Top priorities</h3><p>One thing at a time!</p></div><button class="text-btn" data-go="tasks">All tasks →</button></div><div id="dashboardTasks" class="task-list compact-list"></div></article>
+        </div>
+      </section>
+
+      <section class="page" id="page-timetable">
+        <div class="section-heading"><div><h2>Study timetable 📅</h2><p>Give every subject a little space in your day.</p></div></div>
+        <article class="panel form-panel"><h3>Plan a study session</h3><form id="sessionForm" class="form-grid"><label>Subject<input name="subject" placeholder="e.g. Java Programming" required maxlength="100"></label><label>Date<input name="session_date" type="date" required></label><label>Start time<input name="start_time" type="time" required></label><label>Duration<select name="duration_minutes"><option value="25">25 minutes</option><option value="30" selected>30 minutes</option><option value="45">45 minutes</option><option value="60">1 hour</option><option value="90">1.5 hours</option></select></label><button class="primary-btn form-submit" type="submit">＋ Add to timetable</button></form></article>
+        <article class="panel"><div class="panel-heading"><div><h3>All planned sessions</h3><p>Your study time, organized.</p></div></div><div id="sessionsList" class="session-list"></div></article>
+      </section>
+
+      <section class="page" id="page-tasks">
+        <div class="section-heading"><div><h2>My tasks ☑</h2><p>Break big goals into small, doable steps.</p></div></div>
+        <article class="panel form-panel"><h3>Add a new task</h3><form id="taskForm" class="form-grid"><label>Task name<input name="title" placeholder="e.g. Complete DBMS assignment" required maxlength="180"></label><label>Subject<input name="subject" placeholder="e.g. DBMS" required maxlength="100"></label><label>Due date<input name="due_date" type="date"></label><label>Priority<select name="priority"><option>Low</option><option selected>Medium</option><option>High</option></select></label><button class="primary-btn form-submit" type="submit">＋ Add task</button></form></article>
+        <article class="panel"><div class="panel-heading"><div><h3>Your task list</h3><p>Check things off as you go.</p></div><select id="taskFilter" class="filter-select" aria-label="Filter tasks"><option value="all">All tasks</option><option value="pending">Pending</option><option value="completed">Completed</option></select></div><div id="tasksList" class="task-list"></div></article>
+      </section>
+
+      <section class="page" id="page-progress">
+        <div class="section-heading"><div><h2>Your progress 🌈</h2><p>Look how far you've come. Every step matters!</p></div></div>
+        <div class="progress-grid"><article class="panel progress-feature"><span class="big-emoji">🌟</span><p class="eyebrow">TASK COMPLETION</p><div class="progress-number"><strong id="progressPercent">0%</strong><span>of your tasks completed</span></div><div class="large-progress"><span id="largeProgressBar"></span></div><p id="progressMessage">Add your first task and start your journey.</p></article><article class="panel progress-details"><h3>Your study snapshot</h3><div class="detail-row"><span>📚 Planned sessions</span><strong id="progressSessions">0</strong></div><div class="detail-row"><span>⏱ Planned study time</span><strong id="progressHours">0 min</strong></div><div class="detail-row"><span>📝 Notes saved</span><strong id="progressNotes">0</strong></div><div class="detail-row"><span>🌷 Tasks remaining</span><strong id="progressPending">0</strong></div></article></div>
+        <article class="panel"><h3>Friendly reminder 💌</h3><p class="muted">Progress isn't about being perfect. It's about showing up, learning something new, and trying again tomorrow.</p></article>
+      </section>
+
+      <section class="page" id="page-timer">
+        <div class="section-heading"><div><h2>Focus corner ⏳</h2><p>One task. One little step. You've got this.</p></div></div>
+        <article class="panel timer-panel"><div class="timer-badge">✦ YOUR QUIET FOCUS TIME ✦</div><div class="timer-ring" id="timerRing"><div class="timer-inner"><span id="timerMode">FOCUS SESSION</span><strong id="timerDisplay">25:00</strong><small id="timerHint">Take it one minute at a time</small></div></div><div class="timer-presets"><button class="preset active" data-minutes="25" data-mode="focus">Focus · 25 min</button><button class="preset" data-minutes="5" data-mode="break">Short break · 5 min</button><button class="preset" data-minutes="15" data-mode="break">Long break · 15 min</button></div><div class="timer-actions"><button class="primary-btn" id="timerStart">▶ Start focus</button><button class="secondary-btn" id="timerReset">↺ Reset</button></div><p class="muted timer-caption">Tip: Put your phone away and give this time to yourself. 🌿</p></article>
+      </section>
+
+      <section class="page" id="page-notes">
+        <div class="section-heading"><div><h2>My little notes 📝</h2><p>Keep your ideas, reminders, and subject notes in one place.</p></div></div>
+        <article class="panel form-panel"><h3 id="noteFormHeading">Create a note</h3><form id="noteForm" class="form-grid note-form"><label>Subject<input name="subject" placeholder="e.g. Computer Networks" required maxlength="100"></label><label>Note title<input name="title" placeholder="e.g. Important definitions" required maxlength="180"></label><label class="full-width">Your note<textarea name="content" rows="4" placeholder="Write what you want to remember..." required></textarea></label><div class="form-actions"><button class="primary-btn" type="submit" id="noteSubmit">＋ Save note</button><button class="secondary-btn hidden" type="button" id="noteCancel">Cancel edit</button></div></form></article>
+        <div id="notesList" class="notes-grid"></div>
+      </section>
+
+      <footer class="footer">Made with <span>♥</span> and little steps · StudyMate</footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+  
+<div style="position:fixed;bottom:16px;right:16px;z-index:9999;background:white;padding:12px;border-radius:12px;box-shadow:0 2px 10px #aaa">
+  <button onclick="enablePush()">Enable Desktop Reminders</button>
+  <button onclick="sendTestPush()">Send Test</button>
+</div>
+<script src="/push.js"></script>
+</body>
+</html>
